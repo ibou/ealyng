@@ -5,12 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 #[ApiResource(
-    collectionOperations: ['get', 'post',],
+    collectionOperations: ['get', 'post'],
     itemOperations: ['get', 'put',],
-    attributes: ['order' => 'id'],
+    normalizationContext: ['groups' => 'book:read'],
 )]
 class Book
 {
@@ -20,9 +21,11 @@ class Book
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('book:read')]
     private $isbn;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups('book:read')]
     private $title;
 
     #[ORM\Column(type: 'string', length: 255)]

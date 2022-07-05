@@ -23,7 +23,3 @@ services:
     App\OpenApi\JwtDecorator:
         decorates: 'api_platform.openapi.factory'
         arguments: ['@.inner']
-
-    # 'App\DataProvider\BookItemDataProvider':
-    #     arguments:
-    #       $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item
